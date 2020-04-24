@@ -1,0 +1,131 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/b9bc8883-093b-4fca-91dc-6451776f75c8/ # 
+title: Retail API
+protocols:
+  - HTTP
+types:
+  getproduct: !include datatype/ProductdataType.raml
+  getbill: !include datatype/bill.raml
+
+/products:
+  get:      
+    responses:
+      200:
+        body:
+          application/json:
+            type: getproduct
+            examples:
+              output: !include example/productexample.raml  
+  post: 
+   responses:
+     201:
+       body:
+         application/json:
+           example:
+             message:"sucessfully created"
+     
+  /{id}:      
+    get:
+     queryParameters:
+        id:
+          type: integer
+          required: true        
+     responses:
+       200:
+         body:
+           application/json:
+             example:
+               {
+                 message:"succssfull"
+               } 
+       401:
+         body:
+           application/json:
+             example:
+               {
+                 message:"bad request"
+               } 
+                       
+/Bills:
+  get:
+    description: get all bill data
+    responses:
+      200:
+        body:
+          application/json:
+            type: getbill
+            examples:
+              output: !include example/billexample.raml
+            
+  post: 
+   responses:
+     201:
+       body:
+         application/json:
+           example:
+             message:"sucessfully created"    
+  /{id}:
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true        
+      responses:
+       200:
+        body:
+          application/json:
+            example: message:"successfull"
+    
+    put:
+      description: update by id
+      responses:
+        200:
+          body:
+            application/json:
+              example: message:"updated successfully"
+    delete:
+      description: remove bill date by id
+      responses:
+        200:
+          body:
+            application/json:
+              example: message:"deleted successfully"
+                      
+/Product Catagory:
+  get:
+    description: get all bill data
+    responses:
+      200:
+        body:
+          application/json:
+            example: message:"successfull"
+  post:
+    responses:
+     201:
+       body:
+         application/json:
+           example:
+             message:"sucessfully created" 
+  /{id}:
+    put:
+      description: update by id
+      responses:
+        200:
+          body:
+            application/json:
+              example: message:"updated successfully"
+    delete:
+      description: remove an existing productcatagory
+      responses:
+        200:
+          body:
+            application/json:
+              example: message:"deleted successfully"
+      
+    
+      
+      
+      
+      
+      
+
